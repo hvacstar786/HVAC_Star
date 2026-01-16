@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HVAC STAR | Professional Climate Solutions</title>
+    <style>
+        /* Theme Variables */
+        :root {
+            --primary-color: #0054a6; /* Professional HVAC Blue */
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #f9f9f9;
+            --white: #ffffff;
+            --border-color: #f0f0f0;
+        }
+
+        /* Exact Wix-style layout and spacing */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.4; /* Slightly tighter line height for the "congested" look */
+            background-color: var(--white);
+            font-size: 18px; /* Larger base font size */
+        }
+
+        header {
+            padding: 20px 50px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-wrapper {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 60px; cursor: pointer; } /* Larger logo */
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 30px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active-nav {
+            color: var(--primary-color);
+        }
+
+        main { 
+            max-width: 980px; 
+            margin: 0 auto; 
+            min-height: 70vh;
+        }
+
+        /* Page visibility logic */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text-block {
+            padding: 40px 20px; /* Reduced padding for denser feel */
+        }
+
+        /* Headings updated to Bold and Left Aligned */
+        h1 { 
+            font-size: 48px; 
+            margin-bottom: 15px; 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            text-align: left; 
+        }
+        h2 { 
+            font-size: 38px; 
+            margin-bottom: 15px; 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            text-align: left; 
+        }
+        h3 { 
+            font-size: 22px; 
+            margin-bottom: 10px; 
+            font-weight: bold; 
+        }
+
+        /* Alignment utility for paragraphs */
+        .text-block p {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .centered { text-align: center; }
+
+        .split-section {
+            display: flex;
+            align-items: center;
+            padding: 30px 20px;
+            gap: 30px;
+        }
+
+        .split-text, .split-image { flex: 1; }
+        .split-image img { width: 100%; border-radius: 0; } /* Wix usually has sharp corners */
+
+        .list-section {
+            padding: 40px 20px;
+            background-color: var(--bg-light);
+        }
+
+        .list-section h2 {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .list-section ul {
+            list-style-type: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .list-section li { 
+            font-weight: bold;
+            padding-left: 30px;
+            position: relative;
+            font-size: 20px;
+        }
+
+        .list-section li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-size: 30px;
+            position: absolute;
+            left: 0;
+            top: -8px;
+        }
+
+        .director-section {
+            display: flex;
+            padding: 50px 20px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .director-image img { 
+            width: 450px; 
+            height: 450px; 
+            object-fit: cover; 
+            border-radius: 0; 
+        }
+
+        /* Client Grid */
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+        }
+        .client-item {
+            text-align: center;
+            padding: 10px;
+            background: var(--bg-light);
+        }
+        .client-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 40px;
+            padding: 40px 20px;
+        }
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+        .contact-info h2 { text-align: left; } /* Keep contact title consistent with info */
+        .contact-info p { margin-bottom: 20px; font-size: 18px; }
+        
+        .form-group { margin-bottom: 10px; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333; /* Heavier borders for "larger" feel */
+            font-family: inherit;
+            font-size: 16px;
+        }
+        .submit-btn {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-line {
+            width: 400px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Responsive stack for mobile */
+        @media (max-width: 768px) {
+            .nav-wrapper, .split-section, .director-section, .contact-container {
+                flex-direction: column;
+                display: block;
+                text-align: center;
+            }
+            h1, h2, .list-section h2 { text-align: center; }
+            .list-section ul { display: block; text-align: left; }
+            nav { margin-top: 20px; }
+            nav a { margin: 0 10px; display: inline-block; padding: 5px 0; }
+            .director-image img { width: 100%; height: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="nav-wrapper">
+            <div class="logo" onclick="showPage('home')">
+                <img src="assets/logo.png" alt="hvac star">
+            </div>
+            <nav id="main-nav">
+                <a onclick="showPage('home')" class="active-nav">HOME</a>
+                <a onclick="showPage('clients')">OUR CLIENTS</a>
+                <a onclick="showPage('contact')">CONTACT US</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="content">
+        
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <div class="section-image">
+                <img src="assets/banner-products.jpg" alt="products we supply">
+            </div>
+
+            <section class="text-block">
+                <h1>Your Comfort, Our Commitment</h1>
+                <p>Navigating the world of air conditioning can be overwhelming. That's where we come in At HVAC STAR, We're dedicated to providing personalized assistance to help you find the ideal AC solution. Our knowledgeable team is here to answer your questions, guide you through our selection, and ensure a smooth purchase and installation process. Experience the difference of a truly supported AC solution journey.</p>
+            </section>
+
+            <section class="split-section">
+                <div class="split-text">
+                    <h2>ACs Everywhere</h2>
+                    <p>Welcome to HVAC Star, Your trusted online source for diverse range of air conditioning systems, backed by the reliable expertise of ACS Everywhere. Whether you need to create a comfortable learning environment in a school, a conducive atmosphere for healing in a hospital, a pleasant workspace in a college, or a cool and relaxing at home or anywhere, we have the perfect climate control solution</p>
+                </div>
+                <div class="split-image">
+                    <img src="assets/acs-everywhere.jpg" alt="Welcome to HVAC Star">
+                </div>
+            </section>
+
+            <section class="list-section">
+                <h2>Industries We Serve</h2>
+                <ul>
+                    <li>Industrial Facilities</li>
+                    <li>Residential Homes</li>
+                    <li>Health Care Facilities</li>
+                    <li>Commercial Buildings</li>
+                    <li>Educational Institutions</li>
+                    <li>Hospitality & Retail Spaces</li>
+                </ul>
+            </section>
+
+            <section class="section-image">
+                <img src="assets/mission.jpg" alt="our mission">
+            </section>
+            <section class="text-block">
+                <h2>Our Mission</h2>
+                <p>To provide innovative and sustainable HVAC solutions that enhance indoor comfort, improve energy efficiency, ensure long-term performance, and contribute to a healthier and more sustainable future for our clients, communities, and generations to come.</p>
+            </section>
+
+            <section class="section-image">
+                <img src="assets/vision.jpg" alt="our vision">
+            </section>
+            <section class="text-block">
+                <h2>Our Vision</h2>
+                <p>High-quality, energy-efficient, and cost-effective climate control systems for residential, commercial and industrial applications. With a team of certified professionals and a reputation for reliability, HVAC STAR has become a trusted name in the HVAC industry</p>
+            </section>
+
+            <section class="section-image">
+                <img src="assets/about-us.jpg" alt="about us">
+            </section>
+            <section class="text-block">
+                <h2>About Us</h2>
+                <p>HVAC STAR is a leading provider of Heating, Ventilation, and Air Conditioning (HVAC) solutions, committed to delivering high-quality, energy-efficient, and cost-effective climate control systems for residential, commercial and industrial applications. Uth a team of certified professionals and a reputation for reliability, HVAC STAR has become a trusted name in the HVAC industry</p>
+            </section>
+
+            <section class="section-image">
+                <img src="assets/services.jpg" alt="our services">
+            </section>
+            <section class="text-block">
+                <h2>Our Services</h2>
+                <p><strong>HVAC System Design & Installation</strong></p>
+                <p>Custom design and installation of heating, cooling, and ventilation systems for all types of buildings.</p>
+                <p><strong>Maintenance & Repair</strong></p>
+                <p>Comprehensive maintenance programs and 24/7 emergency repair services to ensure system efficiency.</p>
+                <p><strong>Energy Audits & Upgrades</strong></p>
+                <p>Expert evaluation and retrofitting of HVAC systems to reduce energy consumption and operating costs.</p>
+                <p><strong>Indoor Air Quality Solutions</strong></p>
+                <p>Installation of air purifiers, humidifiers, and ventilation systems to promote healthier indoor environments.</p>
+                <p><strong>Smart Thermostat & Controls</strong></p>
+                <p>Integration of smart technology for remote monitoring and optimized climate control.</p>
+            </section>
+
+            <section class="section-image">
+                <img src="assets/why-choose-us.jpg" alt="why choose us">
+            </section>
+            <section class="list-section">
+                <h2>Why Choose HVAC STAR ?</h2>
+                <ul>
+                    <li>Certified & Experienced Technicians</li>
+                    <li>Customer-Centric Approach</li>
+                    <li>Competitive Pricing</li>
+                    <li>24/7 Emergency Support</li>
+                    <li>Commitment to Sustainability</li>
+                    <li>Industry-Leading Equipment & Technology</li>
+                </ul>
+            </section>
+
+            <section class="director-section">
+                <div class="director-image">
+                    <img src="assets/director.jpg" alt="Managing director: Mohd Shariq siddiqui">
+                </div>
+                <div class="director-text">
+                    <h3>Managing Director:</h3>
+                    <h2>MOHD SHARIQ SIDDIQUI</h2>
+                    <h3>True Words</h3>
+                    <p>"My beliefs are that good people who work hard get their rewards, There will be struggle at times and hurdles along the way-life throws up all sorts but in the end, you will prevail if you stick to the right path."</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- CLIENTS PAGE -->
+        <div id="clients" class="page">
+            <section class="text-block">
+                <h1>Our Clients</h1>
+                <p>Our focus is on empowering our customers to achieve their goals. We work with a diverse range of individuals and businesses, each with unique needs and ambitions. We're dedicated to understanding these specific requirements and delivering tailored solutions that drive success.</p>
+            </section>
+
+            <div class="client-grid">
+                <div class="client-item">
+                    <img src="assets/client-sankalp.jpg" alt="Sankalp hospitals">
+                    <h3>Sankalp hospitals</h3>
+                </div>
+                <div class="client-item">
+                    <img src="assets/client-ultratech.jpg" alt="Aditya Birla: Ultra Tech">
+                    <h3>Aditya Birla: Ultra Tech</h3>
+                </div>
+                <div class="client-item">
+                    <img src="assets/client-colors.jpg" alt="Colors mall">
+                    <h3>Colors mall</h3>
+                </div>
+                <div class="client-item">
+                    <img src="assets/client-sail.jpg" alt="Sail: bhilai steel plant">
+                    <h3>Sail: bhilai steel plant</h3>
+                </div>
+                <div class="client-item">
+                    <img src="assets/client-marriott.jpg" alt="Courtyard by marriott">
+                    <h3>Courtyard by marriott</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact" class="page">
+            <section class="text-block">
+                <h1>Contact Us</h1>
+                <p>Have a question or need assistance? Our team is here to help. Please find our contact information below, including email, phone number, and a contact form for your convenience. We aim to respond to your inquiries as quickly as possible.</p>
+            </section>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Let's Chat</h2>
+                    <p><strong>Phone</strong><br>+91 7753957178</p>
+                    <p><strong>Email</strong><br>Shariq@hvacstar.in</p>
+                    <p><strong>Office Address</strong><br>Pragati Nagar, Camp-1, Ward-30, Bhilai, 490023 (C.G)</p>
+                    <p><strong>Social</strong><br><a href="https://www.instagram.com/hvac.star" target="_blank" style="color:var(--primary-color); text-decoration:none; font-weight:bold;">Instagram: @hvac.star</a></p>
+                </div>
+                <div class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" placeholder="Message"></textarea>
+                    </div>
+                    <button class="submit-btn" onclick="alert('Message feature requires a backend. This is a static copy.')">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <img src="assets/grey-line.jpg" alt="grey divider" class="footer-line">
+        <p>© HVAC STAR</p>
+        <p>ALL RIGHHTS RESERVED</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show the selected page
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+
+            // Update nav active state
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active-nav'));
+            
+            // Find the link that was clicked (based on the onclick text)
+            navLinks.forEach(link => {
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('active-nav');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
