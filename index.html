@@ -232,18 +232,62 @@
             margin: 0 auto 20px auto;
         }
 
-        /* Responsive stack for mobile */
+        /* Mobile View - Ditto Implementation */
         @media (max-width: 768px) {
-            .nav-wrapper, .split-section, .director-section, .contact-container {
-                flex-direction: column;
-                display: block;
-                text-align: center;
+            header {
+                padding: 15px 20px;
             }
-            h1, h2, .list-section h2 { text-align: center; }
-            .list-section ul { display: block; text-align: left; }
-            nav { margin-top: 20px; }
-            nav a { margin: 0 10px; display: inline-block; padding: 5px 0; }
-            .director-image img { width: 100%; height: auto; }
+            .nav-wrapper {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .logo img {
+                height: 50px;
+            }
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            nav a {
+                margin: 5px 10px;
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 36px; /* Slightly smaller but still bold and prominent */
+                text-align: left;
+            }
+            h2 {
+                font-size: 30px;
+                text-align: left;
+            }
+            .split-section, .director-section, .contact-container {
+                flex-direction: column;
+                display: flex;
+                padding: 20px;
+                text-align: left;
+            }
+            .split-image, .director-image {
+                width: 100%;
+                order: -1; /* Image first on mobile stack */
+            }
+            .director-image img {
+                width: 100%;
+                height: auto;
+            }
+            .list-section ul {
+                grid-template-columns: 1fr; /* Single column stack */
+            }
+            .list-section li {
+                font-size: 18px;
+            }
+            .footer-line {
+                width: 80%;
+            }
+            .text-block {
+                padding: 20px;
+            }
         }
     </style>
 </head>
